@@ -16,7 +16,7 @@ com.yourname.bank/
 │   └── AccountService.java
 ├── controller/
 │   └── AccountController.java
-└── dto/
+└── dto.WithdrawRequest/
     └── WithdrawRequest.java
 ```
 
