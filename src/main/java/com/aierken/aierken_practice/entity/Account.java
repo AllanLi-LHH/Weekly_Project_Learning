@@ -9,5 +9,4 @@ public class Account {
     private String accountType;
     private double balance;
     private boolean isActive;
-
 }

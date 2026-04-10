@@ -3,10 +3,13 @@ package com.aierken.aierken_practice.Service;
 import com.aierken.aierken_practice.entity.Account;
 import com.aierken.aierken_practice.repository.AccountRepository;
 import com.aierken.aierken_practice.repository.UserRepository;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class AccountService {
     private final UserRepository userRepository;
     private final AccountRepository accountRepository;
