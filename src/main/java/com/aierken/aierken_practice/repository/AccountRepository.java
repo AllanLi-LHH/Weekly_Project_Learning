@@ -1,8 +1,8 @@
-package com.aierken.bank.repository;
+package com.aierken.aierken_practice.repository;
 
 
-import com.aierken.bank.entity.Account;
-import com.aierken.bank.entity.User;
+import com.aierken.aierken_practice.entity.Account;
+import com.aierken.aierken_practice.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -26,7 +26,7 @@ public class AccountRepository {
     }
 
 
-    public List<Account> findAllByUserId(Long userId) throws Exception{
+    public List<Account> findAccountsByUserId(Long userId) throws Exception{
         if(!userStore.containsKey(userId)) {
             throw new Exception("User not found");
         }
