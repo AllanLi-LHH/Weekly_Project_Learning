@@ -9,6 +9,7 @@ import com.aierken.aierken_practice.dto.ErrorResponse;
 import com.aierken.aierken_practice.dto.SumResponse;
 import com.aierken.aierken_practice.dto.WithdrawRequest;
 import com.aierken.aierken_practice.entity.Account;
+import com.aierken.aierken_practice.entity.Transaction;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +31,14 @@ public class AccountController {
         return ResponseEntity.ok(remainingBalance);
     }
 
+    @PostMapping("/accounts/deposit")
+    public ResponseEntity<Double> deposit(@RequestBody WithdrawRequest request) {
+        double remainingBalance = accountService.deposit(request.getUserId(), request.getAccountId(), request.getAmount());
+        return ResponseEntity.ok(remainingBalance);
+    }
+
+
+
     @GetMapping("/users/{userId}/accounts/rich")
     public ResponseEntity<List<AccountResponse>> rich(@PathVariable Long userId) throws Exception {
         List<AccountResponse> responses = accountService.filterAccountsOver1000(userId).stream().map(this::toResponse).toList();
@@ -39,6 +48,11 @@ public class AccountController {
     @GetMapping("/users/{userId}/accounts/sum")
     public ResponseEntity<SumResponse> sum(@PathVariable Long userId) throws Exception {
         return ResponseEntity.ok(new SumResponse(accountService.sumBalancesOver1000(userId)));
+    }
+
+    @GetMapping("/accounts/{accountId}/transactions")
+    public ResponseEntity<List<Transaction>> getTransactions(@PathVariable String accountNumber) throws Exception {
+        return ResponseEntity.ok(accountService.getTransactionsByAccountNumber(accountNumber));
     }
 
     @ExceptionHandler(AccountNotFoundException.class)
