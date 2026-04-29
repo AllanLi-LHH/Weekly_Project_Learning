@@ -94,6 +94,10 @@ public class AccountService {
             throw new IllegalAmountException("Transfer amount is zero or negative");
         }
 
+        if (fromAccountNumber.equals(toAccountNumber)) {
+            throw new UnauthorizedAccessException("Transfer from and to account cannot be the same");
+        }
+
         Account fromAccount = accountRepository.findByAccountNumber(fromAccountNumber).orElseThrow(()-> new AccountNotFoundException("From Account not found"));
 
         Account toAccount = accountRepository.findByAccountNumber(toAccountNumber).orElseThrow(()-> new AccountNotFoundException("To Account not found"));
@@ -121,6 +125,11 @@ public class AccountService {
     public List<Transaction> getTransactionsByAccountNumber(String accountNumber){
         accountRepository.findByAccountNumber(accountNumber).orElseThrow(()-> new AccountNotFoundException("Account not found"));
         return transactionRepository.findByAccount_AccountNumberOrderByCreatedAtDesc(accountNumber);
+    }
+
+    public List<Account> getAccountsByUserId(Long userId){
+        return accountRepository.findByUser_Id(userId);
+        //.orElseThrow(()-> new AccountNotFoundException("User not found"));
     }
 
     public List<Account> filterAccountsOver1000(Long userId) {
