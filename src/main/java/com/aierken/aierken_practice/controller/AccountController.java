@@ -19,13 +19,13 @@ public class AccountController {
 
     @PostMapping("/accounts/withdraw")
     public ResponseEntity<Double> withdraw(@RequestBody WithdrawRequest request) {
-        double remainingBalance = accountService.withdraw(request.getUserId(), request.getAccountId(), request.getAmount());
+        double remainingBalance = accountService.withdraw(request.getUserId(), request.getAccountNumber(), request.getAmount());
         return ResponseEntity.ok(remainingBalance);
     }
 
     @PostMapping("/accounts/deposit")
     public ResponseEntity<Double> deposit(@RequestBody WithdrawRequest request) {
-        double remainingBalance = accountService.deposit(request.getUserId(), request.getAccountId(), request.getAmount());
+        double remainingBalance = accountService.deposit(request.getUserId(), request.getAccountNumber(), request.getAmount());
         return ResponseEntity.ok(remainingBalance);
     }
 

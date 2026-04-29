@@ -33,8 +33,8 @@ public class AccountService {
     }
 
     @Transactional
-    public double withdraw(Long userId, Long accountId, double amount){
-        Account account = accountRepository.findById(accountId).orElseThrow(()-> {
+    public double withdraw(Long userId, String accountNumber, double amount){
+        Account account = accountRepository.findByAccountNumber(accountNumber).orElseThrow(()-> {
             return new AccountNotFoundException("Account not found");
         });
 
@@ -63,8 +63,8 @@ public class AccountService {
     }
 
     @Transactional
-    public double deposit(Long userId, Long accountId, double amount){
-        Account account = accountRepository.findById(accountId).orElseThrow(()-> {
+    public double deposit(Long userId, String accountNumber, double amount){
+        Account account = accountRepository.findByAccountNumber(accountNumber).orElseThrow(()-> {
             return new AccountNotFoundException("Account not found");
         });
 
