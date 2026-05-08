@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import javax.swing.text.html.Option;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -14,7 +15,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     User findByName(String name);
 
-    User findByEmail(String email);
+    Optional<User> findByEmail(String email);//用option方便进行exception处理
 
     void deleteById(Long id);
 }
