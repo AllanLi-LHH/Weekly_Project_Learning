@@ -6,6 +6,7 @@ import com.aierken.aierken_practice.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Arrays;
 
@@ -13,7 +14,7 @@ import java.util.Arrays;
 public class StoreConfig {
 
     @Bean
-    CommandLineRunner initData(UserRepository userRepository) {
+    CommandLineRunner initData(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         return args -> {
             if (userRepository.count() > 0) {
                 return;
@@ -22,7 +23,7 @@ public class StoreConfig {
             User user1 = new User();
             user1.setName("Alice Johnson");
             user1.setEmail("alice@example.com");
-            user1.setPassword("alice123");
+            user1.setPassword(passwordEncoder.encode("alice123"));
             user1.setPhone("408-111-1111");
             user1.setAddress("101 Main St, San Jose, CA");
             user1.setRole("CUSTOMER");
@@ -54,7 +55,7 @@ public class StoreConfig {
             User user2 = new User();
             user2.setName("Bob Smith");
             user2.setEmail("bob@example.com");
-            user2.setPassword("bob123");
+            user2.setPassword(passwordEncoder.encode("bob123"));
             user2.setPhone("408-222-2222");
             user2.setAddress("202 Market St, Santa Clara, CA");
             user2.setRole("CUSTOMER");
@@ -79,7 +80,7 @@ public class StoreConfig {
             User user3 = new User();
             user3.setName("Charlie Brown");
             user3.setEmail("charlie@example.com");
-            user3.setPassword("charlie123");
+            user3.setPassword(passwordEncoder.encode("charlie123"));
             user3.setPhone("408-333-3333");
             user3.setAddress("303 El Camino Real, Sunnyvale, CA");
             user3.setRole("CUSTOMER");
